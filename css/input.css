@@ -1,6 +1,33 @@
+@font-face {
+  font-family: "Montserrat";
+  src: local("Montserrat")
+    url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+}
+
+@font-face {
+  font-family: "Courier Prime";
+  src: local("Courier")
+    url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+}
+
 @import "tailwindcss";
 
 @theme {
+  /* COLORS */
   --color-gold: #ffd700;
   --color-dark-card: #1a1a1a;
+  --color-GradientBlue: #667eea;
+  --color-GradientPurple: #764ba2;
+  --color-White: #fcfcfc;
+  --color-Gray: #666;
+  --color-Border: rgba(255, 255, 255, 0.2);
+  --color-ProfileColor1: #ff6b6b;
+  --color-ProfileColor2: #feca57;
+  --color-user-departmentBg: rgba(102, 126, 234, 0.1);
+  --color-user-departmentfont: #667eea;
+
+  /* FONTS */
+
+  --font-Montserrat: "Montserrat";
+  --font-Courier: "Courier";
 }
