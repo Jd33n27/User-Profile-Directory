@@ -22,11 +22,11 @@ function showUsers(users) {
   for (let i = 0; i < users.length; i++) {
     const user = users[i];
 
-    html += `
-        <div
+    html += ` <div
           class="user-card-mobile mx-auto bg-White backdrop-blur-lg p-4 rounded-2xl mb-3.5 flex items-center gap-3.5 transition-all duration-300 ease-in-out hover:translate-x-1.5 md:flex-col md:p-6 md:rounded-[20px] md:border-Button-Bg md:border md:hover:translate-y-[-5px]"
           data-department="engineering"
         >
+          <!-- Profile Icon -->
           <div
             class="avatar bg-linear-to-tr from-ProfileColor1 to-ProfileColor2 rounded-full text-dark-card md:mx-auto"
           >
@@ -45,35 +45,32 @@ function showUsers(users) {
               />
             </svg>
           </div>
-          <div class="user-info grow">
+          <div id="user-info" class="grow">
             <div
-              class="user-name font-semibold text-[18px] mb-1.5 text-User-name md:text-2xl"
+              class="user-name font-semibold mb-1.5 text-User-name md:text-2xl"
             >
               ${user.name}
             </div>
-            <div class="user-email text-sm text-Gray mb-2">
-              <strong>Email:</strong> ${user.email}
-            </div>
-            <div class="user-address text-sm text-Gray mb-2">
-              <strong>City:</strong> ${user.address.city}
+            <div class="user-title text-sm mb-2">
+              <strong class="font-bold"> Email: </strong> ${user.email}
             </div>
             <div
-              class="user-company bg-user-department-Bg text-user-department-text py-1 px-3 text-xs rounded-xl mb-2.5 inline-block"
+              class="user-department bg-user-department-Bg text-user-department-text py-1 px-3 text-xs rounded-xl mb-2.5 inline-block"
             >
-              <strong>Company:</strong> ${user.company.name}
+              ${user.company.name}
             </div>
             <div
-              class="user-contact flex gap-4 text-sm text-Gray flex-col md:gap-1 font-Montserrat"
+              class="user-contact flex gap-4 text-sm flex-col md:gap-1 font-Montserrat"
             >
               <div class="contact-item flex items-center gap-1.5">
-                <strong>Website:</strong> ${user.website}
+                ${user.phone}
               </div>
               <div class="contact-item flex items-center gap-1.5">
-                <strong>Phone:</strong> ${user.phone}
+                ${user.website}
               </div>
             </div>
-            </div
-          </div>`;
+          </div>
+        </div>`;
   }
 
   container.innerHTML = html; // Put all HTML on the page
