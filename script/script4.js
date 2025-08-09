@@ -23,8 +23,8 @@ function showUsers(users) {
     const user = users[i];
 
     html += ` <div
-          class="user-card-mobile mx-auto bg-White backdrop-blur-lg p-4 rounded-2xl mb-3.5 flex items-center gap-3.5 transition-all duration-300 ease-in-out hover:translate-x-1.5 md:flex-col md:p-6 md:rounded-[20px] md:border-Button-Bg md:border md:hover:translate-y-[-5px]"
-          data-department="engineering"
+          class="user-card-mobile mx-auto bg-White backdrop-blur-lg p-4 rounded-2xl mb-3.5 flex items-center gap-3.5 transition-all duration-300 ease-in-out hover:translate-x-1.5 md:flex-col md:p-6 md:rounded-[20px] md:border-Button-Bg md:border md:hover:translate-y-[-5px] md:w-xs"
+          data-department="${user.company.name}"
         >
           <!-- Profile Icon -->
           <div
@@ -55,18 +55,25 @@ function showUsers(users) {
               <strong class="font-bold"> Email: </strong> ${user.email}
             </div>
             <div
-              class="user-department bg-user-department-Bg text-user-department-text py-1 px-3 text-xs rounded-xl mb-2.5 inline-block"
+              class="user-title text-sm mb-2"
             >
-              ${user.company.name}
+              <strong class="font-bold"> Company: </strong> ${user.company.name}
             </div>
-            <div
-              class="user-contact flex gap-4 text-sm flex-col md:gap-1 font-Montserrat"
+            <div class="flex text-sm">
+              <button class="w-24 text-black border p-2 rounded-2xl cursor-pointer font-bold hover:bg-Gray" onclick="toggleDetails('details-${user.id}')">
+                View More
+              </button>
+            </div>
+
+
+            <div id="details-${user.id}"
+              class="user-contact flex gap-4 text-sm flex-col md:gap-1 font-Montserrat hidden"
             >
               <div class="contact-item flex items-center gap-1.5">
-                ${user.phone}
+                <strong class="font-bold"> Phone: </strong> ${user.phone}
               </div>
               <div class="contact-item flex items-center gap-1.5">
-                ${user.website}
+                <strong class="font-bold"> Website: </strong> ${user.website}
               </div>
             </div>
           </div>
@@ -88,18 +95,12 @@ getUsers();
 // Get references to all necessary elements
 var searchInput = document.getElementById("searchInput");
 var filterButtons = document.getElementsByClassName("filter-btn");
-var desktopCards = document.getElementsByClassName("user-card-desktop");
 var mobileCards = document.getElementsByClassName("user-card-mobile");
 var currentFilter = "all";
 
 // Function to filter users
 function filterUsers(searchTerm, filter) {
   var allCards = [];
-
-  // Combine desktop and mobile cards into one array
-  for (var i = 0; i < desktopCards.length; i++) {
-    allCards.push(desktopCards[i]);
-  }
 
   for (var j = 0; j < mobileCards.length; j++) {
     allCards.push(mobileCards[j]);

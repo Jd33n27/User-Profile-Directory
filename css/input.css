@@ -21,8 +21,8 @@
   --color-White: #fcfcfc;
   --color-Gray: #666;
   --color-User-name: #333;
-  --color-Button-Bg: rgba(255, 255, 255, 0.2);
-  --color-Button-Hover-BG: rgba(255, 255, 255, 0.3);
+  --color-Button: rgba(255, 255, 255, 0.2);
+  --color-Button-Hover: rgba(255, 255, 255, 0.3);
   --color-ProfileColor1: #ff6b6b;
   --color-ProfileColor2: #feca57;
   --color-user-department-Bg: rgba(102, 126, 234, 0.1);
@@ -39,6 +39,6 @@
 }
 
 .active {
-  background: var(--color-Button-Hover-BG);
+  background: var(--color-Button-Hover);
   transform: translateY(-2px);
 }
