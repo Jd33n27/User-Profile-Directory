@@ -1,54 +1,129 @@
-// Get the container where we'll put user cards
-const container = document.getElementById("user-grid");
+const usersContainer = document.getElementById("usersContainer");
+const searchInput = document.getElementById("searchInput");
+const cityFilter = document.getElementById("cityFilter");
+const companyFilter = document.getElementById("companyFilter");
+const darkModeToggle = document.getElementById("darkModeToggle");
+const statusMessage = document.getElementById("statusMessage");
 
-// Function to get users from the internet
-function getUsers() {
-  fetch("https://jsonplaceholder.typicode.com/users")
-    .then((response) => response.json()) // Convert to JavaScript
-    .then((users) => showUsers(users)) // Show the users
-    .catch((error) => {
-      // Log error to console as string
-      console.log("Error fetching users: " + error.toString());
-      container.innerHTML =
-        '<p class="text-red-400 text-center text-lg">Something went wrong! Check console for details.</p>';
-    });
+let allUsers = [];
+
+// Fetch Users
+async function fetchUsers() {
+  try {
+    statusMessage.innerHTML = "Loading...";
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    const users = await response.json();
+    allUsers = users;
+    populateFilters(data);
+    displayUsers(users);
+    statusMessage.innerHTML = "";
+  } catch (error) {
+    statusMessage.innerHTML = "Error loading users!";
+  }
 }
 
-// Function to display users on the page
-function showUsers(users) {
-  let html = ""; // Empty string to build HTML
+// Display Users
+function displayUsers(users) {
+  card = "";
 
-  // Loop through each user
   for (let i = 0; i < users.length; i++) {
     const user = users[i];
 
-    html += `
-                    <div class="bg-dark-card border-2 border-gold p-5 m-4 rounded-lg shadow-lg">
-                        <h3 class="text-gold text-2xl mb-3 font-bold">${user.name}</h3>
-                        <p class="my-2 text-gray-200"><strong>Email:</strong> ${user.email}</p>
-                        <p class="my-2 text-gray-200"><strong>Company:</strong> ${user.company.name}</p>
-                        <p class="my-2 text-gray-200"><strong>City:</strong> ${user.address.city}</p>
-                        
-                        <button class="bg-gold text-black border-none py-2 px-4 rounded cursor-pointer mt-4 font-bold hover:bg-yellow-300" onclick="toggleDetails('details-${user.id}')">
-                            View More
-                        </button>
-                        
-                        <div id="details-${user.id}" class="mt-4 pt-4 border-t border-gold hidden">
-                            <p class="my-2 text-gray-200"><strong>Phone:</strong> ${user.phone}</p>
-                            <p class="my-2 text-gray-200"><strong>Website:</strong> ${user.website}</p>
-                        </div>
-                    </div>
-                `;
+    // const card = document.createElement("div");
+    // card.className = "bg-white p-4 rounded shadow";
+
+    card += `
+    <div class="bg-White p-4 rounded shadow-2xl">
+      <h2 class="text-xl font-bold">${user.name}</h2>
+      <p>Email: ${user.email}</p>
+      <p>Company: ${user.company.name}</p>
+      <p>City: ${user.address.city}</p>
+      <button class="viewMoreBtn mt-2 px-3 py-1 bg-blue-500 text-white rounded">View More</button>
+      <div class="extraInfo hidden mt-2">
+        <p>Phone: ${user.phone}</p>
+        <p>Website: ${user.website}</p>
+        <p>Username: ${user.username}</p>
+      </div>
+    </div>
+    `;
+
+    usersContainer.innerHTML = card;
   }
 
-  container.innerHTML = html; // Put all HTML on the page
+  // addViewMoreListeners();
 }
 
-// Function to toggle details visibility
-function toggleDetails(id) {
-  const section = document.getElementById(id);
-  section.classList.toggle("hidden");
+// View More Toggle
+function addViewMoreListeners() {
+  const buttons = document.getElementsByClassName("viewMoreBtn");
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", function () {
+      const extraInfo = this.nextElementSibling;
+      extraInfo.classList.toggle("hidden");
+      this.textContent = extraInfo.classList.contains("hidden")
+        ? "View More"
+        : "View Less";
+    });
+  }
 }
 
-// Start getting users when page loads
-getUsers();
+// Populate Filters
+function populateFilters(users) {
+  const cities = [];
+  const companies = [];
+
+  for (let i = 0; i < users.length; i++) {
+    if (!cities.includes(users[i].address.city))
+      cities.push(users[i].address.city);
+    if (!companies.includes(users[i].company.name))
+      companies.push(users[i].company.name);
+  }
+
+  for (let i = 0; i < cities.length; i++) {
+    const option = document.createElement("option");
+    option.value = cities[i];
+    option.textContent = cities[i];
+    cityFilter.appendChild(option);
+  }
+
+  for (let i = 0; i < companies.length; i++) {
+    const option = document.createElement("option");
+    option.value = companies[i];
+    option.textContent = companies[i];
+    companyFilter.appendChild(option);
+  }
+}
+
+// Apply Filters and Search
+function applyFilters() {
+  const searchTerm = searchInput.value.toLowerCase();
+  const selectedCity = cityFilter.value;
+  const selectedCompany = companyFilter.value;
+
+  const filtered = [];
+  for (let i = 0; i < allUsers.length; i++) {
+    const user = allUsers[i];
+    if (
+      (user.name.toLowerCase().includes(searchTerm) ||
+        user.username.toLowerCase().includes(searchTerm)) &&
+      (selectedCity === "" || user.address.city === selectedCity) &&
+      (selectedCompany === "" || user.company.name === selectedCompany)
+    ) {
+      filtered.push(user);
+    }
+  }
+  displayUsers(filtered);
+}
+
+// Event Listeners
+searchInput.addEventListener("input", applyFilters);
+cityFilter.addEventListener("change", applyFilters);
+companyFilter.addEventListener("change", applyFilters);
+
+darkModeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("bg-gray-900");
+  document.body.classList.toggle("text-white");
+});
+
+// Start
+fetchUsers();

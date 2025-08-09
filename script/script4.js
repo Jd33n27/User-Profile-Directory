@@ -1,3 +1,9 @@
+// Get references to all necessary elements
+var searchInput = document.getElementById("searchInput");
+var filterButtons = document.getElementsByClassName("filter-btn");
+var mobileCards = document.getElementsByClassName("user-card-mobile");
+var currentFilter = "all";
+
 // Get the container where we'll put user cards
 const container = document.getElementById("user-grid");
 
@@ -59,6 +65,11 @@ function showUsers(users) {
             >
               <strong class="font-bold"> Company: </strong> ${user.company.name}
             </div>
+            <div
+              class="user-title text-sm mb-2"
+            >
+              <strong class="font-bold"> City: </strong> ${user.address.city}
+            </div>
             <div class="flex text-sm">
               <button class="w-24 text-black border p-2 rounded-2xl cursor-pointer font-bold hover:bg-Gray" onclick="toggleDetails('details-${user.id}')">
                 View More
@@ -91,12 +102,6 @@ function toggleDetails(id) {
 
 // Start getting users when page loads
 getUsers();
-
-// Get references to all necessary elements
-var searchInput = document.getElementById("searchInput");
-var filterButtons = document.getElementsByClassName("filter-btn");
-var mobileCards = document.getElementsByClassName("user-card-mobile");
-var currentFilter = "all";
 
 // Function to filter users
 function filterUsers(searchTerm, filter) {

@@ -3,187 +3,51 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>User Directory</title>
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/output.css" />
+    <title>User Profile Directory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <div class="container">
-      <div class="header">
-        <h1>Team Directory</h1>
-      </div>
+  <body class="bg-gray-100 text-gray-900">
+    <div class="container mx-auto p-6">
+      <h1 class="text-3xl font-bold text-center mb-6">
+        User Profile Directory
+      </h1>
 
-      <div class="search-container">
+      <!-- Controls -->
+      <div class="flex flex-wrap gap-4 mb-6 justify-center">
         <input
-          type="text"
-          class="search-input"
-          placeholder="Search team members..."
           id="searchInput"
+          type="text"
+          placeholder="Search by name or username"
+          class="px-4 py-2 border rounded w-64"
         />
-        <span class="search-icon">🔍</span>
-      </div>
-
-      <div class="filter-bar">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="engineering">
-          Engineering
+        <select id="cityFilter" class="px-4 py-2 border rounded">
+          <option value="">Filter by City</option>
+        </select>
+        <select id="companyFilter" class="px-4 py-2 border rounded">
+          <option value="">Filter by Company</option>
+        </select>
+        <button
+          id="darkModeToggle"
+          class="px-4 py-2 bg-gray-800 text-white rounded"
+        >
+          Dark Mode
         </button>
-        <button class="filter-btn" data-filter="design">Design</button>
-        <button class="filter-btn" data-filter="marketing">Marketing</button>
-        <button class="filter-btn" data-filter="sales">Sales</button>
       </div>
 
-      <!-- Desktop Grid Layout -->
-      <div class="user-grid-desktop" id="desktopGrid">
-        <div class="user-card-desktop" data-department="engineering">
-          <div class="avatar avatar-desktop">JS</div>
-          <div class="user-name">John Smith</div>
-          <div class="user-title">Senior Frontend Developer</div>
-          <div class="user-department">Engineering</div>
-          <div class="user-contact">
-            <div class="contact-item">📧 john.smith@company.com</div>
-            <div class="contact-item">📱 +1 (555) 123-4567</div>
-          </div>
-        </div>
+      <!-- Loading/Error -->
+      <div
+        id="statusMessage"
+        class="text-center text-lg font-semibold mb-4"
+      ></div>
 
-        <div class="user-card-desktop" data-department="design">
-          <div class="avatar avatar-desktop">SD</div>
-          <div class="user-name">Sarah Davis</div>
-          <div class="user-title">UX/UI Designer</div>
-          <div class="user-department">Design</div>
-          <div class="user-contact">
-            <div class="contact-item">📧 sarah.davis@company.com</div>
-            <div class="contact-item">📱 +1 (555) 234-5678</div>
-          </div>
-        </div>
-
-        <div class="user-card-desktop" data-department="marketing">
-          <div class="avatar avatar-desktop">MJ</div>
-          <div class="user-name">Mike Johnson</div>
-          <div class="user-title">Marketing Manager</div>
-          <div class="user-department">Marketing</div>
-          <div class="user-contact">
-            <div class="contact-item">📧 mike.johnson@company.com</div>
-            <div class="contact-item">📱 +1 (555) 345-6789</div>
-          </div>
-        </div>
-
-        <div class="user-card-desktop" data-department="sales">
-          <div class="avatar avatar-desktop">LW</div>
-          <div class="user-name">Lisa Wilson</div>
-          <div class="user-title">Sales Director</div>
-          <div class="user-department">Sales</div>
-          <div class="user-contact">
-            <div class="contact-item">📧 lisa.wilson@company.com</div>
-            <div class="contact-item">📱 +1 (555) 456-7890</div>
-          </div>
-        </div>
-
-        <div class="user-card-desktop" data-department="engineering">
-          <div class="avatar avatar-desktop">AB</div>
-          <div class="user-name">Alex Brown</div>
-          <div class="user-title">Backend Developer</div>
-          <div class="user-department">Engineering</div>
-          <div class="user-contact">
-            <div class="contact-item">📧 alex.brown@company.com</div>
-            <div class="contact-item">📱 +1 (555) 567-8901</div>
-          </div>
-        </div>
-
-        <div class="user-card-desktop" data-department="design">
-          <div class="avatar avatar-desktop">EG</div>
-          <div class="user-name">Emma Garcia</div>
-          <div class="user-title">Product Designer</div>
-          <div class="user-department">Design</div>
-          <div class="user-contact">
-            <div class="contact-item">📧 emma.garcia@company.com</div>
-            <div class="contact-item">📱 +1 (555) 678-9012</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mobile List Layout -->
-      <div class="user-list-mobile" id="mobileList">
-        <div class="user-card-mobile" data-department="engineering">
-          <div class="avatar">JS</div>
-          <div class="user-info">
-            <div class="user-name">John Smith</div>
-            <div class="user-title">Senior Frontend Developer</div>
-            <div class="user-department">Engineering</div>
-            <div class="user-contact">
-              <div class="contact-item">📧 john.smith@company.com</div>
-              <div class="contact-item">📱 +1 (555) 123-4567</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="user-card-mobile" data-department="design">
-          <div class="avatar">SD</div>
-          <div class="user-info">
-            <div class="user-name">Sarah Davis</div>
-            <div class="user-title">UX/UI Designer</div>
-            <div class="user-department">Design</div>
-            <div class="user-contact">
-              <div class="contact-item">📧 sarah.davis@company.com</div>
-              <div class="contact-item">📱 +1 (555) 234-5678</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="user-card-mobile" data-department="marketing">
-          <div class="avatar">MJ</div>
-          <div class="user-info">
-            <div class="user-name">Mike Johnson</div>
-            <div class="user-title">Marketing Manager</div>
-            <div class="user-department">Marketing</div>
-            <div class="user-contact">
-              <div class="contact-item">📧 mike.johnson@company.com</div>
-              <div class="contact-item">📱 +1 (555) 345-6789</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="user-card-mobile" data-department="sales">
-          <div class="avatar">LW</div>
-          <div class="user-info">
-            <div class="user-name">Lisa Wilson</div>
-            <div class="user-title">Sales Director</div>
-            <div class="user-department">Sales</div>
-            <div class="user-contact">
-              <div class="contact-item">📧 lisa.wilson@company.com</div>
-              <div class="contact-item">📱 +1 (555) 456-7890</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="user-card-mobile" data-department="engineering">
-          <div class="avatar">AB</div>
-          <div class="user-info">
-            <div class="user-name">Alex Brown</div>
-            <div class="user-title">Backend Developer</div>
-            <div class="user-department">Engineering</div>
-            <div class="user-contact">
-              <div class="contact-item">📧 alex.brown@company.com</div>
-              <div class="contact-item">📱 +1 (555) 567-8901</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="user-card-mobile" data-department="design">
-          <div class="avatar">EG</div>
-          <div class="user-info">
-            <div class="user-name">Emma Garcia</div>
-            <div class="user-title">Product Designer</div>
-            <div class="user-department">Design</div>
-            <div class="user-contact">
-              <div class="contact-item">📧 emma.garcia@company.com</div>
-              <div class="contact-item">📱 +1 (555) 678-9012</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- <button class="view-toggle" id="viewToggle">⊞</button> -->
+      <!-- Users Container -->
+      <div
+        id="usersContainer"
+        class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+      ></div>
     </div>
+
+    <script src="./script/script.js"></script>
   </body>
-  <script src="./script/script4.js"></script>
 </html>

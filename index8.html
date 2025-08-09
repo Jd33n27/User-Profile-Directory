@@ -1,0 +1,92 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>User Profile Directory</title>
+
+    <!-- Tailwind CDN (for dev) & enable class-based dark mode -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { darkMode: "class" };
+    </script>
+
+    <!-- Your existing project CSS links (kept intact) -->
+    <link rel="stylesheet" href="./css/output.css" />
+    <link rel="stylesheet" href="./css/input.css" />
+  </head>
+
+  <!-- keep body classes and structure as you had them -->
+  <body
+    class="max-w-full bg-linear-to-br from-GradientBlue to-GradientPurple min-h-dvh font-Courier"
+  >
+    <header class="mx-auto mt-6 md:mt-8 px-4">
+      <div class="flex items-center justify-between">
+        <h1
+          class="text-center text-2xl font-Montserrat font-extrabold text-White md:text-4xl"
+        >
+          User Profile Directory
+        </h1>
+
+        <!-- Dark mode toggle top-right -->
+        <div class="ml-4">
+          <button
+            id="darkModeToggle"
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-White text-black text-sm drop-shadow-md hover:scale-105 transition"
+            aria-pressed="false"
+            title="Toggle dark mode"
+          >
+            <span id="darkIcon">🌙</span>
+            <span class="sr-only">Toggle dark mode</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="px-4">
+      <!-- Search Bar -->
+      <div class="relative max-w-2xl mx-auto flex justify-center">
+        <input
+          id="searchInput"
+          type="text"
+          class="px-5 py-2 w-full max-w-2xl bg-White mx-auto mt-6 rounded-full transition-all duration-150 ease-in-out outline-none focus:translate-y-[-2px] drop-shadow-2xl"
+          placeholder="Search team members..."
+        />
+        <span class="absolute right-6 top-[50%] -translate-y-1/2">🔍</span>
+      </div>
+
+      <!-- Filter Section (below search) -->
+      <div
+        class="max-w-2xl mx-auto mt-4 flex gap-3 justify-center"
+        id="filter-controls"
+      >
+        <!-- Two filter-mode buttons: Name (default active) and City -->
+        <button
+          id="filterName"
+          class="filter-mode px-4 py-2 rounded-full bg-ButtonBg text-White text-sm active-mode"
+          data-mode="name"
+        >
+          Name
+        </button>
+
+        <button
+          id="filterCity"
+          class="filter-mode px-4 py-2 rounded-full bg-ButtonBg text-White text-sm"
+          data-mode="city"
+        >
+          City
+        </button>
+      </div>
+
+      <!-- Profiles Area -->
+      <div
+        id="user-grid"
+        class="px-4 md:mx-auto md:grid md:grid-cols-(--grid-template-columns) md:gap-5 md:mb-8 md:container mt-6"
+      >
+        <!-- Cards will be injected here by script.js -->
+      </div>
+    </main>
+
+    <!-- script file -->
+    <script src="./script/script7.js"></script>
+  </body>
+</html>
