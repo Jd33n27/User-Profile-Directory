@@ -2,22 +2,25 @@
 var searchInput = document.getElementById("searchInput");
 var filterButtons = document.getElementsByClassName("filter-btn");
 var mobileCards = document.getElementsByClassName("user-card-mobile");
-var currentFilter = "all";
 
 // Get the container where we'll put user cards
 const container = document.getElementById("user-grid");
+var currentFilter = "all";
 
-// Function to get users from the internet
-function getUsers() {
-  fetch("https://jsonplaceholder.typicode.com/users")
-    .then((response) => response.json()) // Convert to JavaScript
-    .then((users) => showUsers(users)) // Show the users
-    .catch((error) => {
-      // Log error to console as string
-      console.log("Error fetching users: " + error.toString());
-      container.innerHTML =
-        '<p class="text-red-400 text-center text-lg">Something went wrong! Check console for details.</p>';
-    });
+// Api URL
+const apiUrl = "https://jsonplaceholder.typicode.com/users";
+
+// Function to get users from the API
+async function getUsers() {
+  try {
+    const response = await fetch(apiUrl);
+    const userData = await response.json();
+    const users = userData;
+    showUsers(users);
+  } catch (error) {
+    const showError = error.toString();
+    container.innerHTML = `<div class="mx-auto text-xl font-semibold text-center">${showError}</div>`;
+  }
 }
 
 // Function to display users on the page
@@ -78,7 +81,7 @@ function showUsers(users) {
 
 
             <div id="details-${user.id}"
-              class="user-contact flex gap-4 text-sm flex-col md:gap-1 font-Montserrat hidden"
+              class="user-contact gap-4 text-sm flex-col md:gap-1 font-Montserrat hidden"
             >
               <div class="contact-item flex items-center gap-1.5">
                 <strong class="font-bold"> Phone: </strong> ${user.phone}
@@ -97,9 +100,14 @@ function showUsers(users) {
 // Function to toggle details visibility
 function toggleDetails(id) {
   const section = document.getElementById(id);
+  section.classList.toggle("flex");
   section.classList.toggle("hidden");
 }
 
+function toggleTheme() {
+  const themeButton = document.getElementById("theme-button");
+  themeButton.classList.toggle("active");
+}
 // Start getting users when page loads
 getUsers();
 
@@ -154,10 +162,10 @@ for (var i = 0; i < filterButtons.length; i++) {
     // Set current filter
     currentFilter = this.getAttribute("data-filter");
 
-    // Get current search value
-    var searchTerm = searchInput.value.toLowerCase();
+    // // Get current search value
+    // var searchTerm = searchInput.value.toLowerCase();
 
-    // Filter again
-    filterUsers(searchTerm, currentFilter);
+    // // Filter again
+    // filterUsers(searchTerm, currentFilter);
   });
 }

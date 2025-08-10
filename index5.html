@@ -42,30 +42,24 @@
         <!-- Engineering Button -->
         <button
           class="filter-btn py-2 px-4 bg-Button text-White text-sm rounded-3xl cursor-pointer whitespace-nowrap transition-all duration-300 ease-in-out hover:translate-y-[-2px] hover:bg-Button-Hover"
-          data-filter="engineering"
+          data-filter="Company"
         >
-          Engineering
+          Company
         </button>
 
         <!-- Design Button -->
         <button
           class="filter-btn py-2 px-4 bg-Button text-White text-sm rounded-3xl cursor-pointer whitespace-nowrap transition-all duration-300 ease-in-out hover:translate-y-[-2px] hover:bg-Button-Hover"
-          data-filter="design"
+          data-filter="City"
         >
-          Design
-        </button>
-
-        <!-- Marketing Button -->
-        <button
-          class="filter-btn py-2 px-4 bg-Button text-White text-sm rounded-3xl cursor-pointer whitespace-nowrap transition-all duration-300 ease-in-out hover:translate-y-[-2px] hover:bg-Button-Hover"
-          data-filter="marketing"
-        >
-          Marketing
+          City
         </button>
       </div>
       <!-- Theme Toggle Button -->
       <button
-        class="py-2 px-4 mb-4 ml-2 bg-Button text-White text-sm rounded-3xl cursor-pointer whitespace-nowrap transition-all duration-300 ease-in-out hover:translate-y-[-2px] hover:bg-Button-Hover"
+        id="theme-button"
+        class="py-2 px-4 mb-4 ml-2 bg-Button text-White text-sm rounded-3xl cursor-pointer whitespace-nowrap transition-all duration-300 ease-in-out hover:translate-y-[-2px] hover:bg-Button-Hover md:absolute top-[15%] left-[90%]"
+        onclick="toggleTheme()"
       >
         Dark Mode
       </button>

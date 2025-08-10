@@ -41,7 +41,7 @@ async function fetchUsers() {
   showLoading();
   try {
     const res = await fetch(API_URL);
-    if (!res.ok) throw new Error("Network response was not ok");
+    // if (!res.ok) throw new Error("Network response was not ok");
     const data = await res.json();
 
     // store
