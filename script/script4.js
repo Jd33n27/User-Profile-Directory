@@ -18,6 +18,7 @@ async function getUsers() {
     users = userData;
     showUsers(users);
   } catch (error) {
+    // Displaying Error to user
     const showError = error.toString();
     container.innerHTML = `<div class="mx-auto text-xl font-semibold text-center">${showError}</div>`;
   }
@@ -105,8 +106,57 @@ function toggleDetails(id) {
 }
 
 function toggleTheme() {
+  const body = document.body;
+
   const themeButton = document.getElementById("theme-button");
   themeButton.classList.toggle("active");
+  if (body.classList.contains("from-GradientBlue" || "to-GradientPurple")) {
+    // To Change body to Dark Theme
+    body.classList.remove("from-GradientBlue", "to-GradientPurple");
+    body.classList.add(
+      "from-darkmode-gradient-1",
+      "from-0%",
+      "via-darkmode-gradient-2",
+      "via-50%",
+      "to-darkmode-gradient-3",
+      "to-100%"
+    );
+
+    // To Change search bar to dark theme
+    searchInput.classList.remove("bg-Button");
+    searchInput.classList.add(
+      "bg-search-darkmode",
+      "border-2",
+      "border-search-border-darkmode",
+      "placeholder:text-search-border-darkmode"
+    );
+
+    // To change content of button to Light Mode
+    themeButton.textContent = "Light Theme";
+  } else {
+    // To Change Theme of Body to Light Theme
+    body.classList.add("from-GradientBlue", "to-GradientPurple");
+    body.classList.remove(
+      "from-darkmode-gradient-1",
+      "from-0%",
+      "via-darkmode-gradient-2",
+      "via-50%",
+      "to-darkmode-gradient-3",
+      "to-100%"
+    );
+
+    // To Change search bar to light theme
+    searchInput.classList.add("bg-Button");
+    searchInput.classList.remove(
+      "bg-search-darkmode",
+      "border-2",
+      "border-search-border-darkmode",
+      "placeholder:text-search-border-darkmode"
+    );
+
+    // To change content of button to Dark Mode
+    themeButton.textContent = "Dark Theme";
+  }
 }
 
 // Function to hnadle fiter button clicks
@@ -143,62 +193,3 @@ searchInput.addEventListener("input", searchUsers);
 
 // Start getting users when page loads
 getUsers();
-
-// // Function to filter users
-// function filterUsers(searchTerm, filter) {
-//   var allCards = [];
-
-//   for (var j = 0; j < mobileCards.length; j++) {
-//     allCards.push(mobileCards[j]);
-//   }
-
-//   // Loop through each card and decide whether to show or hide
-//   for (var k = 0; k < allCards.length; k++) {
-//     var card = allCards[k];
-//     var name = card.querySelector(".user-name").textContent.toLowerCase();
-//     var title = card.querySelector(".user-title").textContent.toLowerCase();
-//     var department = card.getAttribute("data-department");
-
-//     var matchesSearch =
-//       name.indexOf(searchTerm) !== -1 || title.indexOf(searchTerm) !== -1;
-//     var matchesFilter = filter === "all" || department === filter;
-
-//     if (matchesSearch && matchesFilter) {
-//       if (card.classList.contains("user-card-mobile")) {
-//         card.style.display = "flex";
-//       } else {
-//         card.style.display = "block";
-//       }
-//     } else {
-//       card.style.display = "none";
-//     }
-//   }
-// }
-
-// // Event listener for the search input
-// searchInput.addEventListener("input", function (event) {
-//   var searchTerm = event.target.value.toLowerCase();
-//   filterUsers(searchTerm, currentFilter);
-// });
-
-// // Event listeners for each filter button
-// for (var i = 0; i < filterButtons.length; i++) {
-//   filterButtons[i].addEventListener("click", function () {
-//     // Remove active class from all buttons
-//     for (var j = 0; j < filterButtons.length; j++) {
-//       filterButtons[j].classList.remove("active");
-//     }
-
-//     // Add active class to clicked button
-//     this.classList.add("active");
-
-//     // Set current filter
-//     currentFilter = this.getAttribute("data-filter");
-
-//     // // Get current search value
-//     // var searchTerm = searchInput.value.toLowerCase();
-
-//     // // Filter again
-//     // filterUsers(searchTerm, currentFilter);
-//   });
-// }

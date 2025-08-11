@@ -28,6 +28,17 @@
   --color-user-department-Bg: rgba(102, 126, 234, 0.1);
   --color-user-department-text: #667eea;
 
+  /* Dark Mode Colors */
+  --color-darkmode-gradient-1: #1a1a2e;
+  --color-darkmode-gradient-2: #16213e;
+  --color-darkmode-gradient-3: #0f3460;
+  --color-search-darkmode: rgba(30, 30, 50, 0.9);
+  --color-search-border-darkmode: rgba(255, 255, 255, 0.1);
+  --color-placeholder-darkmode: #999;
+  --color-card-bg-darkmode: rgba(30, 30, 50, 0.8);
+  --color-Profile-darkmode-Color1: #667eea;
+  --color-Profile-darkmode-Color2: #764ba2;
+
   /* FONTS */
 
   --font-Montserrat: "Montserrat";
