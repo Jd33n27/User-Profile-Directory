@@ -15,7 +15,7 @@ async function getUsers() {
   try {
     const response = await fetch(apiUrl);
     const userData = await response.json();
-    const users = userData;
+    users = userData;
     showUsers(users);
   } catch (error) {
     const showError = error.toString();
@@ -33,7 +33,7 @@ function showUsers(users) {
 
     html += ` <div
           class="user-card-mobile mx-auto bg-White backdrop-blur-lg p-4 rounded-2xl mb-3.5 flex items-center gap-3.5 transition-all duration-300 ease-in-out hover:translate-x-1.5 md:flex-col md:p-6 md:rounded-[20px] md:border-Button-Bg md:border md:hover:translate-y-[-5px] md:w-xs"
-          data-department="${user.company.name}"
+          data-filter="${user.company.name}"
         >
           <!-- Profile Icon -->
           <div
@@ -108,64 +108,97 @@ function toggleTheme() {
   const themeButton = document.getElementById("theme-button");
   themeButton.classList.toggle("active");
 }
+
+// Function to hnadle fiter button clicks
+for (let btn of filterButtons) {
+  btn.addEventListener("click", function () {
+    for (let b of filterButtons) {
+      b.classList.remove("active");
+    }
+
+    this.classList.add("active");
+    currentFilter = this.getAttribute("data-filter").toLowerCase();
+
+    searchUsers();
+  });
+}
+
+function searchUsers() {
+  const query = searchInput.value.toLowerCase();
+  let filtererdUsers = users.filter((user) => {
+    if (currentFilter === "name") {
+      return user.name.toLowerCase().includes(query);
+    } else if (currentFilter === "company") {
+      return user.company.name.toLowerCase().includes(query);
+    } else if (currentFilter === "city") {
+      return user.address.city.toLowerCase().includes(query);
+    }
+    return true;
+  });
+
+  showUsers(filtererdUsers);
+}
+
+searchInput.addEventListener("input", searchUsers);
+
 // Start getting users when page loads
 getUsers();
 
-// Function to filter users
-function filterUsers(searchTerm, filter) {
-  var allCards = [];
+// // Function to filter users
+// function filterUsers(searchTerm, filter) {
+//   var allCards = [];
 
-  for (var j = 0; j < mobileCards.length; j++) {
-    allCards.push(mobileCards[j]);
-  }
+//   for (var j = 0; j < mobileCards.length; j++) {
+//     allCards.push(mobileCards[j]);
+//   }
 
-  // Loop through each card and decide whether to show or hide
-  for (var k = 0; k < allCards.length; k++) {
-    var card = allCards[k];
-    var name = card.querySelector(".user-name").textContent.toLowerCase();
-    var title = card.querySelector(".user-title").textContent.toLowerCase();
-    var department = card.getAttribute("data-department");
+//   // Loop through each card and decide whether to show or hide
+//   for (var k = 0; k < allCards.length; k++) {
+//     var card = allCards[k];
+//     var name = card.querySelector(".user-name").textContent.toLowerCase();
+//     var title = card.querySelector(".user-title").textContent.toLowerCase();
+//     var department = card.getAttribute("data-department");
 
-    var matchesSearch =
-      name.indexOf(searchTerm) !== -1 || title.indexOf(searchTerm) !== -1;
-    var matchesFilter = filter === "all" || department === filter;
+//     var matchesSearch =
+//       name.indexOf(searchTerm) !== -1 || title.indexOf(searchTerm) !== -1;
+//     var matchesFilter = filter === "all" || department === filter;
 
-    if (matchesSearch && matchesFilter) {
-      if (card.classList.contains("user-card-mobile")) {
-        card.style.display = "flex";
-      } else {
-        card.style.display = "block";
-      }
-    } else {
-      card.style.display = "none";
-    }
-  }
-}
+//     if (matchesSearch && matchesFilter) {
+//       if (card.classList.contains("user-card-mobile")) {
+//         card.style.display = "flex";
+//       } else {
+//         card.style.display = "block";
+//       }
+//     } else {
+//       card.style.display = "none";
+//     }
+//   }
+// }
 
-// Event listener for the search input
-searchInput.addEventListener("input", function (event) {
-  var searchTerm = event.target.value.toLowerCase();
-  filterUsers(searchTerm, currentFilter);
-});
+// // Event listener for the search input
+// searchInput.addEventListener("input", function (event) {
+//   var searchTerm = event.target.value.toLowerCase();
+//   filterUsers(searchTerm, currentFilter);
+// });
 
-// Event listeners for each filter button
-for (var i = 0; i < filterButtons.length; i++) {
-  filterButtons[i].addEventListener("click", function () {
-    // Remove active class from all buttons
-    for (var j = 0; j < filterButtons.length; j++) {
-      filterButtons[j].classList.remove("active");
-    }
+// // Event listeners for each filter button
+// for (var i = 0; i < filterButtons.length; i++) {
+//   filterButtons[i].addEventListener("click", function () {
+//     // Remove active class from all buttons
+//     for (var j = 0; j < filterButtons.length; j++) {
+//       filterButtons[j].classList.remove("active");
+//     }
 
-    // Add active class to clicked button
-    this.classList.add("active");
+//     // Add active class to clicked button
+//     this.classList.add("active");
 
-    // Set current filter
-    currentFilter = this.getAttribute("data-filter");
+//     // Set current filter
+//     currentFilter = this.getAttribute("data-filter");
 
-    // // Get current search value
-    // var searchTerm = searchInput.value.toLowerCase();
+//     // // Get current search value
+//     // var searchTerm = searchInput.value.toLowerCase();
 
-    // // Filter again
-    // filterUsers(searchTerm, currentFilter);
-  });
-}
+//     // // Filter again
+//     // filterUsers(searchTerm, currentFilter);
+//   });
+// }
