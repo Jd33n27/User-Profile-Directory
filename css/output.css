@@ -55,6 +55,8 @@
     --color-darkmode-gradient-3: #0f3460;
     --color-search-darkmode: rgba(30, 30, 50, 0.9);
     --color-search-border-darkmode: rgba(255, 255, 255, 0.1);
+    --color-Profile-darkmode-Color1: #667eea;
+    --color-Profile-darkmode-Color2: #764ba2;
     --font-Montserrat: "Montserrat";
     --font-Courier: "Courier";
   }
@@ -376,6 +378,10 @@
     --tw-gradient-from: var(--color-GradientBlue);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
   }
+  .from-Profile-darkmode-Color1 {
+    --tw-gradient-from: var(--color-Profile-darkmode-Color1);
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
   .from-ProfileColor1 {
     --tw-gradient-from: var(--color-ProfileColor1);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
@@ -397,6 +403,10 @@
   }
   .to-GradientPurple {
     --tw-gradient-to: var(--color-GradientPurple);
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .to-Profile-darkmode-Color2 {
+    --tw-gradient-to: var(--color-Profile-darkmode-Color2);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
   }
   .to-ProfileColor2 {

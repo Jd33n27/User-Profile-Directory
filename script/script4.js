@@ -37,8 +37,8 @@ function showUsers(users) {
           data-filter="${user.company.name}"
         >
           <!-- Profile Icon -->
-          <div
-            class="avatar bg-linear-to-tr from-ProfileColor1 to-ProfileColor2 rounded-full text-dark-card md:mx-auto"
+          <div id="avatar"
+            class="bg-linear-to-tr from-ProfileColor1 to-ProfileColor2 rounded-full text-dark-card md:mx-auto"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -107,6 +107,7 @@ function toggleDetails(id) {
 
 function toggleTheme() {
   const body = document.body;
+  const avatars = document.getElementById("avatar");
 
   const themeButton = document.getElementById("theme-button");
   themeButton.classList.toggle("active");
@@ -131,6 +132,18 @@ function toggleTheme() {
       "placeholder:text-search-border-darkmode"
     );
 
+    for (let i = 0; i < avatars.length; i++) {
+      const avatar = avatars[i];
+      // To Change avatar to dark theme
+      avatar.classList.remove("from-ProfileColor1", "to-ProfileColor2");
+      avatar.classList.add(
+        "from-Profile-darkmode-Color1",
+        "to-Profile-darkmode-Color2"
+      );
+      console.log(avatars);
+    }
+    console.log(avatars);
+
     // To change content of button to Light Mode
     themeButton.textContent = "Light Theme";
   } else {
@@ -154,12 +167,23 @@ function toggleTheme() {
       "placeholder:text-search-border-darkmode"
     );
 
+    for (let i = 0; i < avatars.length; i++) {
+      const avatar = avatars[i];
+      // To Change avatar to light theme
+      avatar.classList.add("from-ProfileColor1", "to-ProfileColor2");
+      avatar.classList.remove(
+        "from-Profile-darkmode-Color1",
+        "to-Profile-darkmode-Color2"
+      );
+      console.log(avatars);
+    }
+    console.log(avatars);
     // To change content of button to Dark Mode
     themeButton.textContent = "Dark Theme";
   }
 }
 
-// Function to hnadle fiter button clicks
+// Function to handle fiter button clicks
 for (let btn of filterButtons) {
   btn.addEventListener("click", function () {
     for (let b of filterButtons) {
