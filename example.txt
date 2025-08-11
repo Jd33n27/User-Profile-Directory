@@ -1,0 +1,38 @@
+Sherif-deen Abdur-roheem
+8:20 PM
+const items = [
+  { name: "iPhone" },
+  { name: "iPad" },
+  { name: "iMac" },
+  { name: "AirPods" },
+  { name: "Apple Watch" },
+  { name: "MacBook" },
+  { name: "iTunes" },
+  { name: "Vision Pro" },
+];
+
+const searchInput = document.getElementById("searchInput");
+const resultsList = document.getElementById("resultsList");
+const searchBtn = document.getElementById("resultsList");
+function handleSearchInput(event) {
+  const query = event.target.value.toLowerCase();
+
+///////Another message
+const filtered = items.filter((item) =>
+    item.name.toLowerCase().includes(query)
+  );
+
+  displayResults(filtered);
+}
+
+searchInput.addEventListener("input", handleSearchInput);
+
+function displayResults(filteredItems) {
+  resultsList.innerHTML = "";
+
+  filteredItems.forEach((item) => {
+    const li = document.createElement("li");
+    li.textContent = item.name;
+    resultsList.appendChild(li);
+  });
+}

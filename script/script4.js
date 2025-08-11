@@ -33,12 +33,12 @@ function showUsers(users) {
     const user = users[i];
 
     html += ` <div
-          class="user-card-mobile mx-auto bg-White backdrop-blur-lg p-4 rounded-2xl mb-3.5 flex items-center gap-3.5 transition-all duration-300 ease-in-out hover:translate-x-1.5 md:flex-col md:p-6 md:rounded-[20px] md:border-Button-Bg md:border md:hover:translate-y-[-5px] md:w-xs"
+          class="user-card mx-auto bg-White backdrop-blur-lg p-4 rounded-2xl mb-3.5 flex items-center gap-3.5 transition-all duration-300 ease-in-out hover:translate-x-1.5 md:flex-col md:p-6 md:rounded-[20px] md:border-Button-Bg md:border md:hover:translate-y-[-5px] md:w-xs"
           data-filter="${user.company.name}"
         >
           <!-- Profile Icon -->
-          <div id="avatar"
-            class="bg-linear-to-tr from-ProfileColor1 to-ProfileColor2 rounded-full text-dark-card md:mx-auto"
+          <div 
+            class="avatar bg-linear-to-tr from-ProfileColor1 to-ProfileColor2 rounded-full text-dark-card md:mx-auto"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -107,7 +107,10 @@ function toggleDetails(id) {
 
 function toggleTheme() {
   const body = document.body;
-  const avatars = document.getElementById("avatar");
+  const avatars = document.querySelectorAll(".avatar");
+  const card = document.querySelectorAll(".user-card");
+
+  // const card /
 
   const themeButton = document.getElementById("theme-button");
   themeButton.classList.toggle("active");
@@ -132,17 +135,20 @@ function toggleTheme() {
       "placeholder:text-search-border-darkmode"
     );
 
+    // To Change avatar to dark theme
     for (let i = 0; i < avatars.length; i++) {
-      const avatar = avatars[i];
-      // To Change avatar to dark theme
-      avatar.classList.remove("from-ProfileColor1", "to-ProfileColor2");
-      avatar.classList.add(
+      avatars[i].classList.remove("from-ProfileColor1", "to-ProfileColor2");
+      avatars[i].classList.add(
         "from-Profile-darkmode-Color1",
         "to-Profile-darkmode-Color2"
       );
-      console.log(avatars);
     }
-    console.log(avatars);
+
+    // To Change card bg and text theme
+    for (let c = 0; i < card.length; c++) {
+      card[c].classList.remove("bg-White");
+      card[c].classList.add("bg-card-bg-darkmode");
+    }
 
     // To change content of button to Light Mode
     themeButton.textContent = "Light Theme";
@@ -168,16 +174,20 @@ function toggleTheme() {
     );
 
     for (let i = 0; i < avatars.length; i++) {
-      const avatar = avatars[i];
       // To Change avatar to light theme
-      avatar.classList.add("from-ProfileColor1", "to-ProfileColor2");
-      avatar.classList.remove(
+      avatars[i].classList.add("from-ProfileColor1", "to-ProfileColor2");
+      avatars[i].classList.remove(
         "from-Profile-darkmode-Color1",
         "to-Profile-darkmode-Color2"
       );
-      console.log(avatars);
     }
-    console.log(avatars);
+
+    // To Change card bg and text
+    for (let c = 0; i < card.length; c++) {
+      card[c].classList.add("bg-White");
+      card[c].classList.remove("bg-card-bg-darkmode");
+    }
+
     // To change content of button to Dark Mode
     themeButton.textContent = "Dark Theme";
   }
