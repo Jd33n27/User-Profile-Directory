@@ -156,7 +156,7 @@ function toggleTheme() {
     // To Change card bg and text theme
     for (let c = 0; c < card.length; c++) {
       card[c].classList.remove("bg-White");
-      card[c].classList.add("bg-card-bg-darkmode");
+      card[c].classList.add("bg-card-bg-darkmode", "border-White", "border-2");
     }
 
     // To change user info text color to white
