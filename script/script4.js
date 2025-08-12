@@ -109,6 +109,7 @@ function toggleTheme() {
   const body = document.body;
   const avatars = document.querySelectorAll(".avatar");
   const card = document.querySelectorAll(".user-card");
+  console.log(card);
 
   // const card /
 
@@ -145,7 +146,7 @@ function toggleTheme() {
     }
 
     // To Change card bg and text theme
-    for (let c = 0; i < card.length; c++) {
+    for (let c = 0; c < card.length; c++) {
       card[c].classList.remove("bg-White");
       card[c].classList.add("bg-card-bg-darkmode");
     }
@@ -183,10 +184,11 @@ function toggleTheme() {
     }
 
     // To Change card bg and text
-    for (let c = 0; i < card.length; c++) {
+    for (let c = 0; c < card.length; c++) {
       card[c].classList.add("bg-White");
       card[c].classList.remove("bg-card-bg-darkmode");
     }
+    console.log(card);
 
     // To change content of button to Dark Mode
     themeButton.textContent = "Dark Theme";
