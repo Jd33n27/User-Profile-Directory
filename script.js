@@ -75,7 +75,7 @@ function showUsers(users) {
               <strong class="font-bold"> City: </strong> ${user.address.city}
             </div>
             <div class="flex text-sm">
-              <button class="w-24 text-black border p-2 rounded-2xl cursor-pointer font-bold hover:bg-Gray" onclick="toggleDetails('details-${user.id}')">
+              <button class="view-more w-24 text-black border p-2 rounded-2xl cursor-pointer font-bold hover:bg-Gray" onclick="toggleDetails('details-${user.id}')">
                 View More
               </button>
             </div>
@@ -109,9 +109,9 @@ function toggleTheme() {
   const body = document.body;
   const avatars = document.querySelectorAll(".avatar");
   const card = document.querySelectorAll(".user-card");
-  const userInfoContainer = card.querySelectorAll(".user-info");
-  const userInfo = userInfoContainer.querySelectorAll(".user-title");
-  console.log(card);
+  const userInfo = document.querySelectorAll(".user-title");
+  const viewMore = document.querySelectorAll(".view-more");
+  const viewMoreItems = document.querySelectorAll(".contact-item");
 
   // const card /
 
@@ -135,7 +135,8 @@ function toggleTheme() {
       "bg-search-darkmode",
       "border-2",
       "border-search-border-darkmode",
-      "placeholder:text-search-border-darkmode"
+      "placeholder:text-search-border-darkmode",
+      "text-White"
     );
 
     // To Change avatar to dark theme
@@ -158,10 +159,21 @@ function toggleTheme() {
       card[c].classList.add("bg-card-bg-darkmode");
     }
 
-    // To change user info text color
+    // To change user info text color to white
     for (let u = 0; u < userInfo.length; u++) {
       userInfo[u].classList.remove("text-User-name");
       userInfo[u].classList.add("text-White");
+    }
+
+    // To change view more button text color to white
+    for (let u = 0; u < viewMore.length; u++) {
+      viewMore[u].classList.remove("hover:bg-Gray", "text-black");
+      viewMore[u].classList.add("hover:bg-White", "text-White", "border-White");
+    }
+
+    // To change view more info text color to white
+    for (let u = 0; u < viewMoreItems.length; u++) {
+      viewMoreItems[u].classList.add("text-White");
     }
 
     // To change content of button to Light Mode
@@ -184,7 +196,8 @@ function toggleTheme() {
       "bg-search-darkmode",
       "border-2",
       "border-search-border-darkmode",
-      "placeholder:text-search-border-darkmode"
+      "placeholder:text-search-border-darkmode",
+      "text-White"
     );
 
     for (let i = 0; i < avatars.length; i++) {
@@ -206,7 +219,27 @@ function toggleTheme() {
       card[c].classList.add("bg-White");
       card[c].classList.remove("bg-card-bg-darkmode");
     }
-    console.log(card);
+
+    // To change user info text color to black
+    for (let u = 0; u < userInfo.length; u++) {
+      userInfo[u].classList.add("text-User-name");
+      userInfo[u].classList.remove("text-White");
+    }
+
+    // To change view more button text color to normal
+    for (let u = 0; u < viewMore.length; u++) {
+      viewMore[u].classList.add("hover:bg-Gray", "text-black");
+      viewMore[u].classList.remove(
+        "hover:bg-White",
+        "text-White",
+        "border-White"
+      );
+    }
+
+    // To change view more info text color to black
+    for (let u = 0; u < viewMoreItems.length; u++) {
+      viewMoreItems[u].classList.remove("text-White");
+    }
 
     // To change content of button to Dark Mode
     themeButton.textContent = "Dark Theme";
