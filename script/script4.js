@@ -57,7 +57,7 @@ function showUsers(users) {
           </div>
           <div id="user-info" class="grow">
             <div
-              class="user-name font-semibold mb-1.5 text-User-name md:text-2xl"
+              class="user-title font-semibold mb-1.5 text-User-name md:text-2xl"
             >
               ${user.name}
             </div>
@@ -109,6 +109,8 @@ function toggleTheme() {
   const body = document.body;
   const avatars = document.querySelectorAll(".avatar");
   const card = document.querySelectorAll(".user-card");
+  const userInfoContainer = card.querySelectorAll(".user-info");
+  const userInfo = userInfoContainer.querySelectorAll(".user-title");
   console.log(card);
 
   // const card /
@@ -138,10 +140,15 @@ function toggleTheme() {
 
     // To Change avatar to dark theme
     for (let i = 0; i < avatars.length; i++) {
-      avatars[i].classList.remove("from-ProfileColor1", "to-ProfileColor2");
+      avatars[i].classList.remove(
+        "from-ProfileColor1",
+        "to-ProfileColor2",
+        "text-dark-card"
+      );
       avatars[i].classList.add(
         "from-Profile-darkmode-Color1",
-        "to-Profile-darkmode-Color2"
+        "to-Profile-darkmode-Color2",
+        "text-White"
       );
     }
 
@@ -149,6 +156,12 @@ function toggleTheme() {
     for (let c = 0; c < card.length; c++) {
       card[c].classList.remove("bg-White");
       card[c].classList.add("bg-card-bg-darkmode");
+    }
+
+    // To change user info text color
+    for (let u = 0; u < userInfo.length; u++) {
+      userInfo[u].classList.remove("text-User-name");
+      userInfo[u].classList.add("text-White");
     }
 
     // To change content of button to Light Mode
@@ -176,10 +189,15 @@ function toggleTheme() {
 
     for (let i = 0; i < avatars.length; i++) {
       // To Change avatar to light theme
-      avatars[i].classList.add("from-ProfileColor1", "to-ProfileColor2");
+      avatars[i].classList.add(
+        "from-ProfileColor1",
+        "to-ProfileColor2",
+        "text-dark-card"
+      );
       avatars[i].classList.remove(
         "from-Profile-darkmode-Color1",
-        "to-Profile-darkmode-Color2"
+        "to-Profile-darkmode-Color2",
+        "text-White"
       );
     }
 
